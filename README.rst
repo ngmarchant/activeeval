@@ -40,7 +40,7 @@ Example
 
     from activeeval.measures import FMeasure, BalancedAccuracy
     from activeeval.proposals import StaticVarMin
-    from activeeval.pool import Pool
+    from activeeval.pools import Pool
     from activeeval.estimators import AISEstimator
     from activeeval import Evaluator
 
@@ -79,7 +79,7 @@ Example
         # Update
         evaluator.update(instance_id, label, weight)
 
-    print("Estimate of F1 score after 1000 oracle queries is", evaluator.get())
+    print("Estimate of F1 score after 1000 oracle queries is", evaluator.estimate)
 
     # Reuse the samples from above to estimate a different measure
     bal_acc = BalancedAccuracy(y_pred)
