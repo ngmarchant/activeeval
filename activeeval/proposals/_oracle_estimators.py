@@ -739,7 +739,8 @@ class HierarchicalDeterministicOE(PartitionedDeterministicOE):
         else:
             raise ValueError("`tree_prior_type` must be one of {}".format(self.__tree_prior_type_values))
 
-        self._tree = None
+        self._tree = _initialize_internal_tree(self.labels.size, self._prior_counts, self.pool, self.tree_prior_type,
+                                               self.tree_smoothing_constant, self.deterministic)
 
     def _run_em_step(self) -> float:
         # E-step
@@ -1047,9 +1048,9 @@ class HierarchicalStochasticOE(PartitionedStochasticOE):
         else:
             raise ValueError("`tree_prior_type` must be one of {}".format(self.__tree_prior_type_values))
 
-        # Tree that will contain parameters associated with the Bayesian model. Note: caching leaf nodes as the
-        # Tree.leaves() method is slow.
-        self._tree = None
+        # Tree that will contain parameters associated with the Bayesian model.
+        self._tree = _initialize_internal_tree(self.labels.size, self._prior_counts, self.pool, self.tree_prior_type,
+                                               self.tree_smoothing_constant, self.deterministic)
 
     def _update_impl(self, idx: Optional[ndarray], x: Optional[ndarray], y: Optional[ndarray],
                      weight: Optional[ndarray]) -> None:
