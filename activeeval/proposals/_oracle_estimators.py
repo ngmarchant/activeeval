@@ -80,25 +80,31 @@ class BaseOE(ABC):
 
     def predict(self, idx: Union[ndarray, int, Iterable, None] = None,
                 x: Union[ndarray, Iterable, None] = None) -> ndarray:
-        """Get an estimate of the oracle response distribution at the given instances
+        """Get an estimate of the oracle response distribution at the given
+        instances
 
         Parameters
         ----------
         idx : int or array-like with shape (n_instances,) or None, optional (default=None)
             Identifier(s) of the instance(s) for which p(y|x) is requested.
-            Precisely one of `idx` or `x` should be specified.
+            If `idx` is specified, then `x` should be None. If both `idx` and
+            `x` are unspecified, then predictions are returned for all
+            instances.
 
         x : array-like with shape (n_features,) or (n_instances, n_features) or None, optional (default=None)
             Feature vector(s) of the instance(s) for which p(y|x) is requested.
-            Precisely one of `idx` or `x` should be specified.
+            If `x` is specified, then `idx` should be None. If both `idx` and
+            `x` are unspecified, then predictions are returned for all
+            instances.
 
         Returns
         -------
         conditionals : numpy.ndarray, shape (n_instances, n_classes)
             The conditional distributions corresponding to `idx` or `x`.
         """
-        if not ((idx is None and x is not None) or (idx is not None and x is None)):
-            raise ValueError("exactly one of `idx` or `x` should be specified")
+        if not (idx is None and x is None):
+            if idx is not None and x is not None:
+                raise ValueError("`idx` and `x` cannot both be specified")
         if idx is not None:
             idx = np.atleast_1d(idx)
         if x is not None:
@@ -164,7 +170,8 @@ class BasePartitionedOE(BaseOE, ABC):
         ----------
         idx : int or array-like with shape (n_instances,) or None, optional (default=None)
             Identifier(s) of the instance(s) for which p(y|x) is requested.
-            If `idx` is None, p(y|x) is returned for all instances in the pool.
+            If `idx` is unspecified, predictions are returned for all
+            instances in the pool.
 
         x : array-like with shape (n_features,) or (n_instances, n_features) or None, optional (default=None)
             This parameter is ignored for this oracle estimator.
@@ -174,8 +181,6 @@ class BasePartitionedOE(BaseOE, ABC):
         conditionals : numpy.ndarray, shape (n_instances, n_classes)
             The conditional distributions corresponding to `idx`.
         """
-        if idx is None:
-            raise ValueError("`idx` must be specified for this oracle estimator")
         return super().predict(idx, None)
 
 
