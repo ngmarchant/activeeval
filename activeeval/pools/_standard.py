@@ -41,5 +41,8 @@ class Pool(BasePool):
     def n_instances(self) -> int:
         return self._n_instances
 
-    def __getitem__(self, instance_ids: Union[int, ndarray, Iterable]) -> ndarray:
-        return self._features[instance_ids]
+    def __getitem__(self, instance_ids: Union[int, ndarray, Iterable]) -> Optional[ndarray]:
+        if self._features is not None:
+            return self._features[instance_ids]
+        else:
+            return None

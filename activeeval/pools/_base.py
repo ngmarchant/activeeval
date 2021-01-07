@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Union, Iterator, List, Iterable
+from typing import Union, Iterator, List, Iterable, Optional
 from numpy import ndarray
 from treelib import Tree
 
@@ -37,7 +37,7 @@ class BasePool(ABC):
         return self.n_instances
 
     @abstractmethod
-    def __getitem__(self, instance_ids: Union[int, ndarray, Iterable]) -> ndarray:
+    def __getitem__(self, instance_ids: Union[int, ndarray, Iterable]) -> Optional[ndarray]:
         """Get features for instances in the pool
 
         Parameter
