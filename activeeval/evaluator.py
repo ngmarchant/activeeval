@@ -119,8 +119,7 @@ class Evaluator:
         Counts the number of rounds.
     """
     def __init__(self, pool: BasePool, measure: BaseMeasure, proposal: BaseProposal,
-                 estimator: Optional[BaseEstimator] = None, samples: Optional[List[Sample]] = None,
-                 deterministic_oracle: bool = False) -> None:
+                 estimator: Optional[BaseEstimator] = None, samples: Optional[List[Sample]] = None) -> None:
         if not isinstance(pool, BasePool):
             raise TypeError("`pool` must be an instance of activeeval.pool.BasePool")
         self.pool = pool
