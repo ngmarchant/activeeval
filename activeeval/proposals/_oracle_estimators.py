@@ -60,7 +60,7 @@ class BaseOE(ABC):
         weight: float or array-like with shape (n_instances,) or None, optional (default=None)
             Importance weight(s) associated with the observed instance(s).
         """
-        if idx is None or x is None:
+        if idx is None and x is None:
             return None
         if idx is not None:
             idx = np.atleast_1d(idx)
