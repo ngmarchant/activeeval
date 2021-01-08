@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="activeeval",
-    version="0.1.0",
+    version="0.1.2",
     author="Neil Marchant",
     author_email="ngmarchant@gmail.com",
     description="A package for active evaluation of classifiers",
