@@ -101,5 +101,9 @@ ActiveEval is released under the MIT license.
 Citation
 --------
 
-.. [1] N. G. Marchant and B. I. P. Rubinstein. (2020) "A general framework for
-    label efficient online evaluation with asymptotic guarantees".
+.. [1] Neil G. Marchant and Benjamin I. P. Rubinstein. 2021. 
+    Needle in a Haystack: Label-Efficient Evaluation under Extreme Class 
+    Imbalance. In *Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD ’21)*, 
+    ACM, New York, NY, USA, 11 pages. 
+    DOI: `10.1145/3447548.3467435 <https://doi.org/10.1145/3447548.3467435>`_.
+    arXiv: `2006.06963 <https://arxiv.org/abs/2006.06963>`_.
